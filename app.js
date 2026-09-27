@@ -1,10 +1,11 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 
 const app = express();
 const Student = require("./models/Student");
 mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log("MongoDB connected"))
+    .then(() => console.log("MongoDB atlas connected"))
     .catch(err => console.log(err));
 
 app.set("view engine", "ejs");
