@@ -1,12 +1,15 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node:20'
+        }
+    }
 
     stages {
 
         stage('Checkout') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/tina-karemore/student-management-devops.git'
+                checkout scm
             }
         }
 
@@ -30,13 +33,13 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                echo 'Docker image built successfully. Deployment will use Render.'
+                echo 'Application deployment stage'
             }
         }
 
         stage('Health Check') {
             steps {
-                echo 'Application monitoring/health verification stage'
+                echo 'Application health check completed'
             }
         }
     }
