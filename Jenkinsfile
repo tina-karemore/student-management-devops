@@ -1,15 +1,20 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:20'
-        }
-    }
+    agent any
 
     stages {
 
         stage('Checkout') {
             steps {
                 checkout scm
+            }
+        }
+
+        stage('Setup Node.js') {
+            steps {
+                sh '''
+                    apt-get update
+                    apt-get install -y nodejs npm
+                '''
             }
         }
 
@@ -33,13 +38,13 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                echo 'Application deployment stage'
+                echo 'Deployment stage completed'
             }
         }
 
         stage('Health Check') {
             steps {
-                echo 'Application health check completed'
+                echo 'Health check stage completed'
             }
         }
     }
