@@ -41,6 +41,9 @@ app.post("/students/:id/delete", async (req, res) => {
     await Student.findByIdAndDelete(req.params.id);
     res.redirect("/");
 });
+app.get("/health", (req, res) => {
+    res.status(200).json({ status: "OK" });
+});
 
 app.listen(3000, () => {
     console.log("Server running on http://localhost:3000");
